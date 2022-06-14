@@ -262,6 +262,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="000"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTripleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnIgual">
       <Properties>
@@ -272,6 +275,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCeroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnComa">
       <Properties>
