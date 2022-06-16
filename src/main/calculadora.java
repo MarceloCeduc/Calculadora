@@ -54,7 +54,7 @@ public class calculadora extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CALCULADORA");
         setAlwaysOnTop(true);
-        setBackground(new java.awt.Color(255, 0, 204));
+        setBackground(new java.awt.Color(255, 153, 102));
         setResizable(false);
 
         txtPantalla.setEditable(false);
@@ -350,13 +350,11 @@ public class calculadora extends javax.swing.JFrame {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         String pantalla = this.txtPantalla.getText();
-        Integer.parseInt(pantalla);
         if (pantalla.length() == 1){
             this.txtPantalla.setText("0");
          }else{
-            if(pantalla.length()< 1){
-                pantalla.length() = pantalla.length() - 1;
-                
+            if(pantalla.length()> 1){
+                this.txtPantalla.setText(pantalla.substring(0, pantalla.length() - 1));
             }
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -371,7 +369,11 @@ public class calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComaActionPerformed
 
     private void btnTripleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTripleActionPerformed
-        this.printNumber("000");
+        String pantalla = this.txtPantalla.getText();
+        if(!pantalla.equals("0")){
+            this.printNumber("000");
+        }
+        
     }//GEN-LAST:event_btnTripleActionPerformed
 
     private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
@@ -393,8 +395,13 @@ public class calculadora extends javax.swing.JFrame {
                 break;
             case "-": this.txtPantalla.setText(entero(a-b));
                 break;
-            case "/": this.txtPantalla.setText(entero(a/b));
-                break;
+            case "/": 
+                if(b==0){
+                    this.txtPantalla.setText("ERROR");
+                }else{
+                    this.txtPantalla.setText(entero(a/b));    
+                }
+                                break;
             case "*": this.txtPantalla.setText(entero(a*b));
                 break;
             
@@ -438,19 +445,15 @@ public class calculadora extends javax.swing.JFrame {
                     }
                 }    
             this.txtPantalla.setText(pantalla);
-        }
-        
-        
-}
-    
+        }       
+}   
     public String entero(float resultado){
         String entero ="";
         entero = Float.toString(resultado);
         if (resultado%1==0){
             entero = entero.substring(0, entero.length()-2);
         }
-        return entero;
-        
+        return entero;       
     }
     /**
      * @param args the command line arguments
