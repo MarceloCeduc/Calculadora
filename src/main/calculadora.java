@@ -11,11 +11,13 @@ package main;
  */
 public class calculadora extends javax.swing.JFrame {
 
-    /**
-     * Creates new form calculadora
-     */
+    public float a;
+    public float b;
+    public String operador;
+    
     public calculadora() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -52,9 +54,11 @@ public class calculadora extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CALCULADORA");
         setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(255, 0, 204));
         setResizable(false);
 
         txtPantalla.setEditable(false);
+        txtPantalla.setBackground(new java.awt.Color(0, 204, 204));
         txtPantalla.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtPantalla.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPantalla.setText("0");
@@ -66,7 +70,13 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnClearerror.setText("CE");
+        btnClearerror.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearerrorActionPerformed(evt);
+            }
+        });
 
+        btnClear.setBackground(new java.awt.Color(204, 0, 204));
         btnClear.setText("C");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +92,11 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnDivision.setText("÷");
+        btnDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDivisionActionPerformed(evt);
+            }
+        });
 
         btnSiete.setText("7");
         btnSiete.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +120,11 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnMultiplicacion.setText("x");
+        btnMultiplicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMultiplicacionActionPerformed(evt);
+            }
+        });
 
         btnSeis.setText("6");
         btnSeis.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +148,11 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnResta.setText("-");
+        btnResta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaActionPerformed(evt);
+            }
+        });
 
         btnTres.setText("3");
         btnTres.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +162,11 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnSuma.setText("+");
+        btnSuma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSumaActionPerformed(evt);
+            }
+        });
 
         btnUno.setText("1");
         btnUno.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +189,13 @@ public class calculadora extends javax.swing.JFrame {
             }
         });
 
+        btnIgual.setBackground(new java.awt.Color(0, 204, 204));
         btnIgual.setText("=");
+        btnIgual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIgualActionPerformed(evt);
+            }
+        });
 
         btnCero.setText("0");
         btnCero.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +306,10 @@ public class calculadora extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        this.a=0;
+        this.b=0;
+        this.txtPantalla.setText("0");
+        
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisActionPerformed
@@ -310,7 +349,16 @@ public class calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNueveActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        String pantalla = this.txtPantalla.getText();
+        Integer.parseInt(pantalla);
+        if (pantalla.length() == 1){
+            this.txtPantalla.setText("0");
+         }else{
+            if(pantalla.length()< 1){
+                pantalla.length() = pantalla.length() - 1;
+                
+            }
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void txtPantallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPantallaActionPerformed
@@ -329,6 +377,52 @@ public class calculadora extends javax.swing.JFrame {
     private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
         this.printNumber("0");
     }//GEN-LAST:event_btnCeroActionPerformed
+
+    private void btnSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumaActionPerformed
+      this.a = Float.parseFloat(this.txtPantalla.getText());
+      this.operador = "+";
+      this.txtPantalla.setText("0");
+      
+       
+    }//GEN-LAST:event_btnSumaActionPerformed
+
+    private void btnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgualActionPerformed
+        this.b = Float.parseFloat(this.txtPantalla.getText());
+        switch(this.operador){
+            case "+": this.txtPantalla.setText(entero(a+b));
+                break;
+            case "-": this.txtPantalla.setText(entero(a-b));
+                break;
+            case "/": this.txtPantalla.setText(entero(a/b));
+                break;
+            case "*": this.txtPantalla.setText(entero(a*b));
+                break;
+            
+            
+        }
+    }//GEN-LAST:event_btnIgualActionPerformed
+
+    private void btnRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaActionPerformed
+        this.a = Float.parseFloat(this.txtPantalla.getText());
+      this.operador = "-";
+      this.txtPantalla.setText("0");
+    }//GEN-LAST:event_btnRestaActionPerformed
+
+    private void btnMultiplicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplicacionActionPerformed
+        this.a = Float.parseFloat(this.txtPantalla.getText());
+      this.operador = "*";
+      this.txtPantalla.setText("0");
+    }//GEN-LAST:event_btnMultiplicacionActionPerformed
+
+    private void btnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivisionActionPerformed
+        this.a = Float.parseFloat(this.txtPantalla.getText());
+      this.operador = "/";
+      this.txtPantalla.setText("0");
+    }//GEN-LAST:event_btnDivisionActionPerformed
+
+    private void btnClearerrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearerrorActionPerformed
+        this.txtPantalla.setText("0");
+    }//GEN-LAST:event_btnClearerrorActionPerformed
     private void printNumber(String buttonText){
         String pantalla = this.txtPantalla.getText();
         if(pantalla.length() < 8){
@@ -348,6 +442,16 @@ public class calculadora extends javax.swing.JFrame {
         
         
 }
+    
+    public String entero(float resultado){
+        String entero ="";
+        entero = Float.toString(resultado);
+        if (resultado%1==0){
+            entero = entero.substring(0, entero.length()-2);
+        }
+        return entero;
+        
+    }
     /**
      * @param args the command line arguments
      */
