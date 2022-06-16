@@ -13,6 +13,7 @@ public class calculadora extends javax.swing.JFrame {
 
     public float a;
     public float b;
+    public float c;
     public String operador;
     
     public calculadora() {
@@ -69,6 +70,7 @@ public class calculadora extends javax.swing.JFrame {
             }
         });
 
+        btnClearerror.setBackground(new java.awt.Color(204, 0, 204));
         btnClearerror.setText("CE");
         btnClearerror.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +78,6 @@ public class calculadora extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setBackground(new java.awt.Color(204, 0, 204));
         btnClear.setText("C");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,46 +307,43 @@ public class calculadora extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        this.a=0;
-        this.b=0;
-        this.txtPantalla.setText("0");
-        
+    this.txtPantalla.setText("0");                
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisActionPerformed
-        this.printNumber("6");
+        this.valor("6");
     }//GEN-LAST:event_btnSeisActionPerformed
 
     private void btnUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoActionPerformed
-        this.printNumber("1");
+        this.valor("1");
     }//GEN-LAST:event_btnUnoActionPerformed
 
     private void btnDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDosActionPerformed
-        this.printNumber("2");
+        this.valor("2");
     }//GEN-LAST:event_btnDosActionPerformed
 
     private void btnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTresActionPerformed
-        this.printNumber("3");
+        this.valor("3");
     }//GEN-LAST:event_btnTresActionPerformed
 
     private void btnCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatroActionPerformed
-        this.printNumber("4");
+        this.valor("4");
     }//GEN-LAST:event_btnCuatroActionPerformed
 
     private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
-        this.printNumber("5");
+        this.valor("5");
     }//GEN-LAST:event_btnCincoActionPerformed
 
     private void btnSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteActionPerformed
-        this.printNumber("7");
+        this.valor("7");
     }//GEN-LAST:event_btnSieteActionPerformed
 
     private void btnOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOchoActionPerformed
-        this.printNumber("8");
+        this.valor("8");
     }//GEN-LAST:event_btnOchoActionPerformed
 
     private void btnNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueveActionPerformed
-        this.printNumber("9");
+        this.valor("9");
     }//GEN-LAST:event_btnNueveActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -364,20 +362,20 @@ public class calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPantallaActionPerformed
 
     private void btnComaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComaActionPerformed
-        this.printNumber(".");
+        this.valor(".");
         
     }//GEN-LAST:event_btnComaActionPerformed
 
     private void btnTripleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTripleActionPerformed
         String pantalla = this.txtPantalla.getText();
         if(!pantalla.equals("0")){
-            this.printNumber("000");
+            this.valor("000");
         }
         
     }//GEN-LAST:event_btnTripleActionPerformed
 
     private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
-        this.printNumber("0");
+        this.valor("0");
     }//GEN-LAST:event_btnCeroActionPerformed
 
     private void btnSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumaActionPerformed
@@ -392,17 +390,21 @@ public class calculadora extends javax.swing.JFrame {
         this.b = Float.parseFloat(this.txtPantalla.getText());
         switch(this.operador){
             case "+": this.txtPantalla.setText(entero(a+b));
+                this.c=Float.parseFloat(this.txtPantalla.getText());
                 break;
             case "-": this.txtPantalla.setText(entero(a-b));
+                this.c=Float.parseFloat(this.txtPantalla.getText());
                 break;
             case "/": 
                 if(b==0){
                     this.txtPantalla.setText("ERROR");
                 }else{
-                    this.txtPantalla.setText(entero(a/b));    
+                    this.txtPantalla.setText(entero(a/b));
+                    this.c=Float.parseFloat(this.txtPantalla.getText());
                 }
                                 break;
             case "*": this.txtPantalla.setText(entero(a*b));
+                this.c=Float.parseFloat(this.txtPantalla.getText());
                 break;
             
             
@@ -428,6 +430,9 @@ public class calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisionActionPerformed
 
     private void btnClearerrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearerrorActionPerformed
+        this.a=0;
+        this.b=0;
+        this.c=0;
         this.txtPantalla.setText("0");
     }//GEN-LAST:event_btnClearerrorActionPerformed
     private void printNumber(String buttonText){
@@ -454,6 +459,15 @@ public class calculadora extends javax.swing.JFrame {
             entero = entero.substring(0, entero.length()-2);
         }
         return entero;       
+    }
+    public void valor(String buttonText){
+        if(c >= 1){
+            this.txtPantalla.setText("0");
+            c=0;
+            this.printNumber(buttonText);
+        }else{
+            this.printNumber(buttonText);
+        }
     }
     /**
      * @param args the command line arguments
